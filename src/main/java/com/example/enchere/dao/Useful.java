@@ -1,6 +1,5 @@
 package com.example.enchere.dao;
 
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
