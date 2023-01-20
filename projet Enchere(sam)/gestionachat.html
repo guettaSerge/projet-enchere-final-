@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>gestionachat</title>
+    <link rel="stylesheet" href="gestionachat_fichiers/bootstrap.min.css">
+</head>
+
+<body style="text-align: center;">
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal-ajouter-modele">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Ajouter Nouveau Produit</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: left;">
+                    <form>
+                        <p style="text-align: left;">Designation</p><input class="form-control" type="text">
+                        <p style="text-align: left;">Marque</p><input class="form-control" type="text">
+                        <p style="text-align: left;">Modele</p><input class="form-control" type="text">
+                    </form><button class="btn btn-primary" type="button" style="text-align: left;margin-top: 3%;">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 5%;">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Affichage des demandes</h1>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-md-4" style="width: 20%;">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style="text-decoration:  underline;">Navigation</h4>
+                        <p><a href="file:///S:/Document%20itu/S5/Gestion%20d'entreprise(mr%20Tovo)/gestionachat-affichage/export/demandeachatdepartement.html">demande achat departement</a></p>
+                        <p><a href="file:///S:/Document%20itu/S5/Gestion%20d'entreprise(mr%20Tovo)/gestionachat-affichage/export/demandeachatdepartement.html">demandes par departement</a></p>
+                        <p><a href="file:///S:/Document%20itu/S5/Gestion%20d'entreprise(mr%20Tovo)/gestionachat-affichage/export/demandeachatglobal.html">demandes globales</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" style="width: 40%;">
+                <form style="text-align: left;">
+                    <p style="text-align: left;">Nom departement</p><input class="form-control" type="text">
+                    <p style="text-align: left;">Reference produit</p><input class="form-control" type="text" value="sddddd">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Designation Produit</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><select class="form-select">
+                                            <option value="Ordinateur" selected="selected">Ordinateur</option>
+                                            <option value="Souris">Souris</option>
+                                        </select></td>
+                                    <td><button class="btn btn-primary" type="button" style="background: rgb(73,73,74);border-style: none;" data-bs-target="#modal-ajouter-modele" data-bs-toggle="modal">+</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="text-align: left;">Marque Produit</p><select class="form-select">
+                        <option value="Asus" selected="selected">Asus</option>
+                        <option value="Lenovo">Lenovo</option>
+                    </select>
+                    <p style="text-align: left;margin-top: 4%;">Modele Produit</p><select class="form-select">
+                        <option value="Asus Rog Computer" selected="selected">Asus Rog Computer</option>
+                        <option value="Ideapad 3">Ideapad 3 </option>
+                    </select>
+                    <p style="text-align: left;margin-top: 3%;">Quantite</p><input class="form-control" type="text"><button class="btn btn-primary" type="submit" style="margin-top: 4%;">Ajouter</button>
+                </form>
+            </div>
+            <div class="col-md-4" style="width: 40%;">
+                <form class="text-start" style="margin-top: 30%;">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td style="font-weight: bold;">Designation</td>
+                                    <td style="font-weight: bold;">Marque</td>
+                                    <td style="font-weight: bold;">Modele</td>
+                                    <td style="font-weight: bold;">Action</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Ordinateur</td>
+                                    <td>Asus</td>
+                                    <td>Rog</td>
+                                    <td><button class="btn btn-primary" type="button" style="background: rgb(73,73,74);border-style: none;">x</button></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Telephone</td>
+                                    <td>Samsung</td>
+                                    <td>A50</td>
+                                    <td><button class="btn btn-primary" type="button" style="background: rgb(73,73,74);border-style: none;">x</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><button class="btn btn-primary" type="submit" style="margin-top: 4%;">Confirmer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="gestionachat_fichiers/bootstrap.min.js"></script>
+
+
+<div id="simple-translate-button" style="display: none;"></div><div id="simple-translate-panel" style="display: none;"><p>...</p></div></body></html>
