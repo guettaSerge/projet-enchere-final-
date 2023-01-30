@@ -4,7 +4,6 @@
  */
 package com.example.enchere.model;
 
-import com.example.enchere.dao.AccessBase;
 import com.example.enchere.dao.Attribute;
 import com.example.enchere.dao.TableName;
 
@@ -13,8 +12,8 @@ import com.example.enchere.dao.TableName;
  *
  * @author pc
  */
-@TableName(table = "Admin",view="9")
-public class Admin extends AccessBase {
+@TableName(table = "",view="9")
+public class Admin {
    @Attribute(attrName = "idAdmin", attrType = "", idPrimaryKey = "yes")
     private Integer idAdmin;
     @Attribute(attrName = "nom", attrType = "", idPrimaryKey = "")

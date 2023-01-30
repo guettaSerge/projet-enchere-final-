@@ -5,8 +5,9 @@ import com.example.enchere.dao.Attribute;
 import com.example.enchere.dao.TableName;
 
 @TableName(table = "Client",view="vw_ficheMonetaireClient")
+
 public class ClientSolde extends AccessBase {
-    @Attribute(attrName = "idAdmin", attrType = "", idPrimaryKey = "yes")
+    @Attribute(attrName = "idClient", attrType = "", idPrimaryKey = "yes")
     private Integer idClient;
     @Attribute(attrName = "nom", attrType = "", idPrimaryKey = "")
     private String nom;
@@ -18,9 +19,10 @@ public class ClientSolde extends AccessBase {
     Float argententrant ;
     @Attribute(attrName = "argentsortant", attrType = "", idPrimaryKey = "")
     Float argentsortant ;
-    @Attribute(attrName = "argentbloquee", attrType = "", idPrimaryKey = "")
-    Float argentbloquee ;
-
+    @Attribute(attrName = "solde", attrType = "", idPrimaryKey = "")
+    Float solde ;
+    
+    
 
     public Integer getIdClient() {
         return idClient;
@@ -70,12 +72,12 @@ public class ClientSolde extends AccessBase {
         this.argentsortant = argentsortant;
     }
 
-    public Float getArgentbloquee() {
-        return argentbloquee;
+    public Float getSolde() {
+        return solde;
     }
 
-    public void setArgentbloquee(Float argentbloquee) {
-        this.argentbloquee = argentbloquee;
+    public void setSolde(Float solde) {
+        this.solde = solde;
     }
-
+   
 }

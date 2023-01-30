@@ -21,7 +21,11 @@ public class MouvementEntree extends AccessBase{
     private Date date;
    @Attribute(attrName = "idClient", attrType = "", idPrimaryKey = "")
     private Integer idClient;
-
+   
+   @Attribute(attrName = " AdminidAdmin", attrType = "", idPrimaryKey = "")
+    private Integer idAdmin;
+   
+   
     public Integer getIdMouvementEntree() {
         return idMouvementEntree;
     }
@@ -34,7 +38,8 @@ public class MouvementEntree extends AccessBase{
         return valeur;
     }
 
-    public void setValeur(Float valeur) {
+    public void setValeur(Float valeur) throws Exception {
+        isPositifNumber(valeur);
         this.valeur = valeur;
     }
 
@@ -61,5 +66,8 @@ public class MouvementEntree extends AccessBase{
     public void setIdAdmin(Integer idAdmin) {
         this.idAdmin = idAdmin;
     }
-    Integer idAdmin;
+    public void isPositifNumber(Float number) throws Exception{
+    if(number<0)
+        throw new Exception("n'entrer que du chiffre positif");
+    }
 }

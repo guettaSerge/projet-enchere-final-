@@ -1,5 +1,6 @@
 package com.example.enchere.dao;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
@@ -313,21 +314,19 @@ public class Useful {
             throw new Exception(message);
         }
     }
-	public static Time setStringToTime(String heure)throws Exception{
-		try{
-			String[] splt=Useful.split(heure,":");
-			Time rep=new Time(Integer.parseInt(splt[0]),Integer.parseInt(splt[1]),Integer.parseInt(splt[2]));
-			return rep;
-		}
-		catch(Exception e){
-			throw new Exception("Time invalide");
-		}
-
-	}
-
-
-    
+    public static Time setStringToTime(String heure)throws Exception{
+        try{
+            String[] splt=Useful.split(heure,":");
+        Time rep=new Time(Integer.parseInt(splt[0]),Integer.parseInt(splt[1]),Integer.parseInt(splt[2]));
+        return rep;
+        }
+        catch(Exception e){
+            throw new Exception("Time invalide");
+        }
+        
+    }
     public static void main(String[] a) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, Exception{
-        //Useful.isValidDate(date, );
+        Useful.setStringToTime("11:11:11");
+        System.out.println("matriw");
     }
 }

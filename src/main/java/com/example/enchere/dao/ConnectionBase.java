@@ -13,10 +13,10 @@ public class ConnectionBase
 	}
         public static Connection getCon() throws Exception {
             Connection rep= ConnectionBase.establishConnection(
-                    "org.postgresql.Driver",
-                    "jdbc:postgresql://containers-us-west-40.railway.app:6893/enchere",
-                    "postgres",
-                    "mkVtrp5oZppaVleNlKaU"
+                "org.postgresql.Driver",
+                "jdbc:postgresql://localhost:5432/enchere",
+                "postgres",
+                "123456"
             );
             rep.setAutoCommit(false);
             return rep;

@@ -8,16 +8,16 @@ import java.util.Date;
 
 import com.example.enchere.dao.*;
 
-@TableName(table = "TokenAdmin",view="9")   
-public class Token {
-    @Attribute(attrName = "idTokenAdmin", attrType = "", idPrimaryKey = "")
+@TableName(table = "TokenClient",view="9")   
+public class TokenCLient {
+    @Attribute(attrName = "idTokenClient", attrType = "", idPrimaryKey = "")
     private Integer idToken;
-    @Attribute(attrName = "ValeurToken", attrType = "", idPrimaryKey = "")
+    @Attribute(attrName = "valeurToken", attrType = "", idPrimaryKey = "")
     private String valeurToken;
-    @Attribute(attrName = "DateExpiration", attrType = "", idPrimaryKey = "")
+    @Attribute(attrName = "", attrType = "dateExpiration", idPrimaryKey = "")
     private Date dateExpiration;
     @Attribute(attrName = "", attrType = "", idPrimaryKey = "")
-    private Integer idAdmin;
+    private Integer idClient;
 
     public Integer getIdToken() {
         return idToken;
@@ -43,15 +43,15 @@ public class Token {
         this.dateExpiration = dateExpiration;
     }
 
-    public Integer getIdAdmin() {
-        return idAdmin;
+    public Integer getIdClient() {
+        return idClient;
     }
 
-    public void setIdAdmin(Integer idAdmin) {
-        this.idAdmin = idAdmin;
+    public void setIdClient(Integer idClient) {
+        this.idClient = idClient;
     }
 
-	public Iterable<Token> findAll() {
+	public Iterable<TokenCLient> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
