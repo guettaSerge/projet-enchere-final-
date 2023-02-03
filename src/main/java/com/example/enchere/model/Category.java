@@ -14,7 +14,7 @@ import com.example.enchere.dao.TableName;
  *
  * @author pc
  */
-@TableName(table = "Caterory",view="9")   
+@TableName(table = "Category",view="9")   
 public class Category extends AccessBase{
     @Attribute(attrName = "idCategory", attrType = "", idPrimaryKey = "yes")
     private Integer idCategory;

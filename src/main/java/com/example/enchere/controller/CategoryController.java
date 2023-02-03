@@ -67,31 +67,33 @@ public class CategoryController {
 
     // creating post mapping that post the marque detail in the database
     @PostMapping("/Category")
-    private int saveCategory(@RequestParam int idCategory, @RequestParam String nom) {
-
+    private Data saveCategory( @RequestParam String nom) {
+        Data data=new Data();
         try {
            Category a = new Category();
-            a.setIdCategory(idCategory);
             a.setNom(nom);
             a.insertBase();
-            return 1;
+           data.setData(a);
         } catch (Exception e) {
-            return 0;
+           data.setError(e);
         }
+        return data;
     }
     // creating put mapping that updates the marque detail
     @PutMapping("/Category")
-    private int updateCategory(@RequestParam int idCategory, @RequestParam String nom) {
-
+    private Data updateCategory(@RequestParam int idCategory, @RequestParam String nom) {
+        Data data=new Data();
         try {
             Category a = new Category();
             a.setIdCategory(idCategory);
             a.setNom(nom);
             a.updateBase();
-            return 1;
+            data.setData(a);
+
         } catch (Exception e) {
-            return 0;
+           data.setError(e);
         }
+        return data;
     }
 
 }

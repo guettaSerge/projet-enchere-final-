@@ -3,10 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.example.enchere.model;
-import java.util.Date;
-
-
-
 /**
  *
  * @author pc
@@ -15,6 +11,7 @@ import com.example.enchere.dao.*;
 import com.example.enchere.modelAff.ClientSolde;
 import com.example.enchere.modelAff.ValeurEnchereMax;
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
 @TableName(table = "Proposition",view="9")   
 public class Proposition extends AccessBase{
@@ -93,6 +90,7 @@ public class Proposition extends AccessBase{
     }
 
     public void setIdEnchere(Integer idEnchere) {
+
         this.idEnchere = idEnchere;
     }
 
@@ -100,19 +98,34 @@ public class Proposition extends AccessBase{
         return idClient;
     }
 
-    public void setIdClient(Integer idClient) {
+    public void setIdClient(Integer idClient) throws Exception {
+        if(isMiseBelongAuthor(idClient))
+            throw new Exception("vous n'ete pas sensée miser sur ce mise");
         this.idClient = idClient;
-    }
+
+}
      public void isPositifNumber(Float number) throws Exception{
     if(number<0)
         throw new Exception("n'entrer que du chiffre positif");
     }
+    public Enchere getAuthorENchere() throws Exception {
+        Enchere en=new Enchere();
+        en.setIdEnchere(this.getIdEnchere());
+        en= (Enchere) en.find().get(0);
+        return en;
+    }
+    public boolean isMiseBelongAuthor(Integer miseur) throws Exception {
+        Enchere enchere=this.getAuthorENchere();
+        Integer author=enchere.getIdClient();
+       return  author.intValue()==miseur.intValue();
+    }
     public static void main(String [] args) throws Exception{
         Proposition prop=new Proposition();
-        prop.setIdClient(3);
-        prop.setIdEnchere(1);
-        float f=(float) 94001.0;
-        prop.setValeurVerified(f);
+
+        ArrayList<Proposition> enchere=prop.find();
+        System.out.println("ok");
+    
+        
         System.out.println("ok ok");
     }
     

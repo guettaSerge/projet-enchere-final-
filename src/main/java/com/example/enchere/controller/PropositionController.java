@@ -48,7 +48,18 @@ public class PropositionController {
         }
         return data;
     }
-
+    @GetMapping("/proposition/enchere/{enchereId}")
+    private Data getPropositionByEnchere(@PathVariable("enchereId") int enchereId) {
+        Data data = new Data();
+        try {
+            Proposition prop = new Proposition();
+            prop.setIdEnchere(enchereId);
+            data.setData(prop.find());
+        } catch (Exception e) {
+            data.setError(e);
+        }
+        return data;
+    }
     // creating a delete mapping that deletes a specified marque
     @DeleteMapping("/proposition/{proposition_id}")
     private void deleteBook(@PathVariable("proposition_id") int proposition_id) {
@@ -63,8 +74,8 @@ public class PropositionController {
 
     // creating post mapping that post the marque detail in the database
     @PostMapping("/Proposition")
-    private int saveProposition(@RequestParam float valeur,@RequestParam String date,@RequestParam int idClient,@RequestParam int idEnchere) {
-
+    private Data saveProposition(@RequestParam float valeur,@RequestParam String date,@RequestParam int idClient,@RequestParam int idEnchere) {
+        Data data=new Data();
         try {
             Proposition prop=new Proposition();
             prop.setValeur(valeur);
@@ -72,10 +83,11 @@ public class PropositionController {
             prop.setIdClient(idClient);
             prop.setIdEnchere(idEnchere);
             prop.insertBase();
-            return 1;
+            data.setData(prop);
         } catch (Exception e) {
-            return 0;
+            data.setError(e);
         }
+        return data;
     }
 
 

@@ -5,32 +5,29 @@
  */
 package com.example.enchere.modelAff;
 
+import com.example.enchere.dao.AccessBase;
+import com.example.enchere.dao.Attribute;
+import com.example.enchere.dao.TableName;
+
 /**
  *
  * @author P14A-Serge
  */
-import com.example.enchere.dao.*;
-@TableName(table = "Produit",view="vw_produitVenduAff")   
+@TableName(table = "-",view="vw_ProduitVendu")
 public class ProduitVendu extends AccessBase{
-    @Attribute(attrName = "idProduit", attrType = "", idPrimaryKey = "yes")
-    private Integer idProduit;
-   @Attribute(attrName = "nom", attrType = "", idPrimaryKey = "")
-    private String nom;
-    @Attribute(attrName = "categoryidcategory", attrType = "", idPrimaryKey = "")
-    private Integer idCategory;
-    @Attribute(attrName = "nombreproduit", attrType = "", idPrimaryKey = "")
-    private Integer nombreVendu;
+     @Attribute(attrName = "nombreProduit", attrType = "", idPrimaryKey = "")
+    private Integer nombreProduit;
     @Attribute(attrName = "months", attrType = "", idPrimaryKey = "")
     private Integer month;
     @Attribute(attrName = "years", attrType = "", idPrimaryKey = "")
     private Integer years;
 
-    public Integer getNombreVendu() {
-        return nombreVendu;
+    public Integer getNombreProduit() {
+        return nombreProduit;
     }
 
-    public void setNombreVendu(Integer nombreVendu) {
-        this.nombreVendu = nombreVendu;
+    public void setNombreProduit(Integer nombreProduit) {
+        this.nombreProduit = nombreProduit;
     }
 
     public Integer getMonth() {
@@ -48,29 +45,7 @@ public class ProduitVendu extends AccessBase{
     public void setYears(Integer years) {
         this.years = years;
     }
-   
     
-    public Integer getIdProduit() {
-        return idProduit;
-    }
 
-    public void setIdProduit(Integer idProduit) {
-        this.idProduit = idProduit;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public Integer getIdCategory() {
-        return idCategory;
-    }
-
-    public void setIdCategory(Integer idCategory) {
-        this.idCategory = idCategory;
-    }
+    
 }

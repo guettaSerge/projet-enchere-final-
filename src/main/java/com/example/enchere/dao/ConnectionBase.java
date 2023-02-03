@@ -14,9 +14,9 @@ public class ConnectionBase
         public static Connection getCon() throws Exception {
             Connection rep= ConnectionBase.establishConnection(
                 "org.postgresql.Driver",
-                "jdbc:postgresql://localhost:5432/enchere",
+                "jdbc:postgresql://containers-us-west-40.railway.app:6893/venteenchere",
                 "postgres",
-                "123456"
+                "mkVtrp5oZppaVleNlKaU"
             );
             rep.setAutoCommit(false);
             return rep;

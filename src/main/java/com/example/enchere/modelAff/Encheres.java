@@ -10,24 +10,43 @@ package com.example.enchere.modelAff;
  * @author P14A-Serge
  */
 import com.example.enchere.dao.*;
+import com.example.enchere.model.Enchere;
+import com.example.enchere.traitement.RechercheMultiParametre;
+import java.lang.reflect.Field;
+import java.sql.Connection;
 import java.sql.Date;
-@TableName(table = "Enchere",view="vw_EnchereWithStatut")   
-public class Encheres extends AccessBase{
-    @Attribute(attrName = "", attrType = "", idPrimaryKey = "yes")
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Time;
+import java.util.ArrayList;
+@TableName(table = "Enchere",view="vw_EnchereWithStatut")
+public class Encheres {
+    @Attribute(attrName = "idEnchere", attrType = "", idPrimaryKey = "yes")
     private Integer idEnchere;
+    @Attribute(attrName = "nom", attrType = "", idPrimaryKey = "")
+    private String nom;
    @Attribute(attrName = "debut", attrType = "", idPrimaryKey = "")
     private Date debut;
-   @Attribute(attrName = "fin", attrType = "", idPrimaryKey = "")
-    private Date fin;
+   @Attribute(attrName = "duree", attrType = "", idPrimaryKey = "")
+    private Time duree;
    @Attribute(attrName = "prixDepart", attrType = "", idPrimaryKey = "")
     private Float prixDepart;
-    @Attribute(attrName = "idProduit", attrType = "", idPrimaryKey = "")
-    private Integer idProduit;
+    @Attribute(attrName = "idCategory", attrType = "", idPrimaryKey = "")
+    private Integer idCategory;
     @Attribute(attrName = "idClient", attrType = "", idPrimaryKey = "")
     private Integer idClient;
     @Attribute(attrName = "statut", attrType = "", idPrimaryKey = "")
     private Integer statut;
 
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    
     public Integer getStatut() {
         return statut;
     }
@@ -52,12 +71,12 @@ public class Encheres extends AccessBase{
         this.debut = debut;
     }
 
-    public Date getFin() {
-        return fin;
+    public Time getDuree() {
+        return duree;
     }
 
-    public void setFin(Date fin) {
-        this.fin = fin;
+    public void setDuree(Time duree) {
+        this.duree = duree;
     }
 
     public Float getPrixDepart() {
@@ -68,12 +87,12 @@ public class Encheres extends AccessBase{
         this.prixDepart = prixDepart;
     }
 
-    public Integer getIdProduit() {
-        return idProduit;
+    public Integer getIdCategory() {
+        return idCategory;
     }
 
-    public void setIdProduit(Integer idProduit) {
-        this.idProduit = idProduit;
+    public void setIdCategory(Integer idCategory) {
+        this.idCategory = idCategory;
     }
 
     public Integer getIdClient() {
@@ -82,5 +101,41 @@ public class Encheres extends AccessBase{
 
     public void setIdClient(Integer idClient) {
         this.idClient = idClient;
+    }
+    
+    public ArrayList<Encheres> multiCritere(RechercheMultiParametre parametre) throws Exception{
+        Connection con=null;
+        PreparedStatement stmt=null;
+        try{
+            con=ConnectionBase.getCon();
+            String query="select * from vw_EnchereWithStatutCategorie "+parametre.getConditionMultiCritere();
+            stmt=(con.prepareStatement(query));
+        	ResultSet res=stmt.executeQuery();
+                ArrayList val = new ArrayList();
+        	while(res.next()){
+        		Encheres encheres=new Encheres();
+                         encheres.setIdClient(res.getInt("idClient"));
+                         encheres.setIdEnchere(res.getInt("idEnchere"));
+                         encheres.setDebut(res.getDate("debut"));
+                         encheres.setDuree(res.getTime("duree"));
+                         encheres.setPrixDepart(res.getFloat("prixDepart"));
+                         encheres.setNom(res.getString("nom"));
+                         encheres.setIdCategory(res.getInt("idCategory"));
+                         encheres.setStatut(res.getInt("statut"));
+        		val.add(encheres);
+        	}
+             return val;
+        }
+        catch(Exception e){
+            throw e;
+        }
+        finally {
+        	if(stmt!=null)stmt.close();
+                if(con!=null)con.close();
+        }
+        
+    }
+     public static void main(String[] args) throws Exception{
+
     }
 }

@@ -3,20 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.example.enchere.model;
-
-import java.util.Date;
-
 import com.example.enchere.dao.*;
 
-@TableName(table = "TokenClient",view="9")   
-public class TokenCLient {
+import java.sql.Date;
+import java.util.ArrayList;
+
+@TableName(table = "TokenClient",view="9")
+public class TokenClient extends AccessBase{
     @Attribute(attrName = "idTokenClient", attrType = "", idPrimaryKey = "")
     private Integer idToken;
     @Attribute(attrName = "valeurToken", attrType = "", idPrimaryKey = "")
     private String valeurToken;
-    @Attribute(attrName = "", attrType = "dateExpiration", idPrimaryKey = "")
+    @Attribute(attrName = "dateExpiration", attrType = "dateExpiration", idPrimaryKey = "")
     private Date dateExpiration;
-    @Attribute(attrName = "", attrType = "", idPrimaryKey = "")
+    @Attribute(attrName = "idClient", attrType = "", idPrimaryKey = "")
     private Integer idClient;
 
     public Integer getIdToken() {
@@ -51,7 +51,17 @@ public class TokenCLient {
         this.idClient = idClient;
     }
 
-	public Iterable<TokenCLient> findAll() {
+    public Integer setClientByToken() throws Exception {
+        this.setValeurToken(valeurToken);
+        ArrayList<TokenClient> alltoken=this.find();
+        if(alltoken.size()<=0)throw new Exception("token invalide");
+        TokenClient client=alltoken.get(0);
+        if(client.getDateExpiration().before(new java.util.Date())){
+            throw new Exception("token expiré");
+        }
+        return client.getIdClient();
+    }
+	public Iterable<TokenClient> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -60,4 +70,16 @@ public class TokenCLient {
 		// TODO Auto-generated method stub
 		return null;
 	}
+    public static void main(String [] args) throws Exception {
+        int idclient=1;
+        String token="rand"+(Math.random()+idclient)+"num";
+        Data data=new Data();
+        TokenClient tkn=new TokenClient();
+        tkn.setValeurToken(token);
+        tkn.setIdClient(1);
+        java.util.Date now=new java.util.Date();
+        now.setDate(now.getDate()+1);
+        tkn.setDateExpiration(new Date(now.getTime()));
+            tkn.insertBase();
+    }
 }

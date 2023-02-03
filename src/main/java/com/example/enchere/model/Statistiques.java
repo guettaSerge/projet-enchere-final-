@@ -30,7 +30,19 @@ public class Statistiques {
     ArrayList<CategoryTopBenefice> topProdBenef;
     ArrayList<CategoryTopChiffreAffaire> topProdChiffAff;
     ArrayList<CategoryVendu> topCategoryVendu;
+    ArrayList<ProduitVendu>  produitVendu;
 
+    
+
+    public ArrayList<ProduitVendu> getProduitVendu() {
+        return produitVendu;
+    }
+
+    public void setProduitVendu(ArrayList<ProduitVendu> produitVendu) {
+        this.produitVendu = produitVendu;
+    }
+    
+    
     public ArrayList<Benefice> getBenefice() {
         return benefice;
     }
@@ -98,6 +110,11 @@ public class Statistiques {
         variable3.setMonth(month);
         variable3.setYears(years);
         this.setTopCategoryVendu(variable3.find(con));
+        
+        ProduitVendu variable4=new ProduitVendu();
+        variable4.setMonth(month);
+        variable4.setYears(years);
+        this.setProduitVendu(variable4.find(con));
         }
         catch(Exception e){
             throw e;
@@ -106,12 +123,52 @@ public class Statistiques {
         if(con!=null)con.close();
         }
     }
+   
+   public String[] getMontYear(){
+       int taille=this.benefice.size();
+       String[] str=new String[taille];
+      for(int i=0;i<taille;i++){
+          Benefice b=benefice.get(i);
+          str[i]="'"+b.getMonth()+"-"+b.getYears()+"'";
+      }
+      return str;
+   }
+   public String[] getBenefices(){
+        int taille=this.benefice.size();
+       String[] str=new String[taille];
+      for(int i=0;i<taille;i++){
+          Benefice b=benefice.get(i);
+          str[i]="'"+b.getBenefice()+"'";
+      }
+      return str;
+   }
+   public String[] getChiffreAffaires(){
+        int taille=this.chiffreAffaire.size();
+       String[] str=new String[taille];
+      for(int i=0;i<taille;i++){
+          ChiffreAffaire b=chiffreAffaire.get(i);
+          str[i]="'"+b.getChiffreAffaire()+"'";
+      }
+      return str;
+   }
+   
+   public String[] getProduitVendus(){
+        int taille=this.produitVendu.size();
+       String[] str=new String[taille];
+      for(int i=0;i<taille;i++){
+          ProduitVendu b=this.produitVendu.get(i);
+          str[i]="'"+b.getNombreProduit()+"'";
+      }
+      return str;
+   }
+  
+
     public static void main(String[]dfgrtg) throws Exception{
     Statistiques stat=new Statistiques();
-    stat.setMonth(1);
-    stat.setYears(2023);
     stat.find();
-    System.out.println("hahaha");
+    stat.setYears(2023);
+    String[] my=stat.getMontYear();
+    System.out.println(my[0]);
     }
         
     

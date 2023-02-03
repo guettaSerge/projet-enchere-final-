@@ -4,8 +4,10 @@
  */
 package com.example.enchere.model;
 
+import com.example.enchere.dao.AccessBase;
 import com.example.enchere.dao.Attribute;
 import com.example.enchere.dao.TableName;
+import java.util.ArrayList;
 
 
 /**
@@ -13,7 +15,7 @@ import com.example.enchere.dao.TableName;
  * @author pc
  */
 @TableName(table = "Commission",view="9")
-public class Commission {
+public class Commission extends AccessBase{
     @Attribute(attrName = "idCommission", attrType = "", idPrimaryKey = "yes")
     private Integer idCommission;
     
@@ -36,5 +38,14 @@ public class Commission {
         this.pourcentage = pourcentage;
     }
     
+     public static void main(String[] args) throws Exception{
+        Commission ench=new Commission();
+        ArrayList<Commission> enchere=ench.find();
+        System.out.println("ok");
+        
+        Commission c=new Commission();
+        c.setPourcentage((float)0.2);
+        c.insertBase();
+    }
     
 }

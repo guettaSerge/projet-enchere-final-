@@ -7,6 +7,7 @@ package com.example.enchere.model;
 import com.example.enchere.dao.AccessBase;
 import com.example.enchere.dao.Attribute;
 import com.example.enchere.dao.TableName;
+import java.util.ArrayList;
 
 
 
@@ -17,7 +18,7 @@ import com.example.enchere.dao.TableName;
 @TableName(table = "Client",view="9")   
 
 public class Client extends AccessBase{
-   @Attribute(attrName = "idAdmin", attrType = "", idPrimaryKey = "yes")
+   @Attribute(attrName = "idClient", attrType = "", idPrimaryKey = "yes")
     private Integer idClient;
     @Attribute(attrName = "nom", attrType = "", idPrimaryKey = "")
     private String nom;
@@ -56,5 +57,16 @@ public class Client extends AccessBase{
 
     public void setPasse(String passe) {
         this.passe = passe;
+    }
+    public static void main(String[] args) throws Exception{
+        Client ench=new Client();
+        ArrayList<Client> enchere=ench.find();
+        System.out.println("ok");
+        
+        Client c=new Client();
+        c.setNom("sdfef");
+        c.setEmail("sdfdf");
+        c.setPasse("dfdf");
+        c.insertBase();
     }
 }

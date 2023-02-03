@@ -323,7 +323,11 @@ public class AccessBase {
         		ArrayList<String> arguments=new ArrayList();
         		for(Field f: attribute) {
         			String libelle=AccessBase.getAttrName(f);
-        			arguments.add(res.getString(libelle));
+                                try{
+                                    arguments.add(res.getString(libelle));
+                                }catch(Exception e){
+                                    arguments.add("");
+                                }
         		}
         		val.add(createNewObjectLikeBase(arguments.toArray(new String[arguments.size()]),attribute));
         	}
