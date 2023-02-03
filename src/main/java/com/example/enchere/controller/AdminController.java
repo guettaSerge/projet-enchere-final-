@@ -25,18 +25,17 @@ public class AdminController {
     // creating a get mapping that retrieves all the Marques detail from the
     // database
     @GetMapping("/admin")
-    private ArrayList<Admin> getAllAdmin() throws Exception {
+    private Data getAllAdmin() throws Exception {
         Data data = new Data();
         try {
 
             Admin ad =new Admin();
-           return ad.find();
+          data.setData(ad.find());
 
         } catch (Exception e) {
             data.setError(e);
-            throw e;
         }
-
+        return data;
     }
     @GetMapping("/admin/test")
     private Data Atestw() {

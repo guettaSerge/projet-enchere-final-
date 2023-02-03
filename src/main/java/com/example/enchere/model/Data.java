@@ -1,5 +1,7 @@
 package com.example.enchere.model;
 
+import com.google.gson.Gson;
+
 public class Data {
     private Object data;
     private Exception error;
@@ -18,6 +20,6 @@ public class Data {
     }
 
     public void setData(Object data) {
-        this.data = data;
+        this.data = new Gson().toJson(data);
     }
 }
