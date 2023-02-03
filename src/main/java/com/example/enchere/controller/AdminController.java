@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.enchere.model.Admin;
 import com.example.enchere.model.Data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author pc
@@ -23,16 +25,16 @@ public class AdminController {
     // creating a get mapping that retrieves all the Marques detail from the
     // database
     @GetMapping("/admin")
-    private String getAllAdmin() {
+    private ArrayList<Admin> getAllAdmin() throws Exception {
         Data data = new Data();
         try {
 
             Admin ad =new Admin();
-            ad.find();
-            return "je teste juste 1";
+           return ad.find();
+
         } catch (Exception e) {
             data.setError(e);
-            return e.getMessage();
+            throw e;
         }
 
     }
