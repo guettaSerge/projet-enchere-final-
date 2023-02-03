@@ -32,9 +32,18 @@ public class AdminController {
         } catch (Exception e) {
             data.setError(e);
         }
-        return "je teste ceci";
+        return "je teste juste";
     }
-
+    @GetMapping("/admin/test")
+    private Data Atestw() {
+        Data data = new Data();
+        try {
+            data.setData("je suis serge et j'aime la glace");
+        } catch (Exception e) {
+            data.setError(e);
+        }
+        return data;
+    }
     // creating a get mapping that retrieves the detail of a specific marque
     @GetMapping("/admin/{admin_id}")
     private Data getAdmin(@PathVariable("admin_id") int admin_id) {

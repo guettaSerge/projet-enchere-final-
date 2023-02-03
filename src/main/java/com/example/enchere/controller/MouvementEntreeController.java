@@ -64,35 +64,35 @@ public class MouvementEntreeController {
 
     // creating post mapping that post the marque detail in the database
     @PostMapping("/MouvementEntree")
-    private int saveMouvementEntree(@RequestParam float valeur,@RequestParam String date,@RequestParam int idClient) {
-
+    private Data saveMouvementEntree(@RequestParam float valeur,@RequestParam int idClient) {
+        Data data=new Data();
         try {
             MouvementEntree mvt=new MouvementEntree();
             mvt.setValeur(valeur);
-            mvt.setDate(Date.valueOf(date));
             mvt.setIdClient(idClient);
             mvt.insertBase();
-            return 1;
+            data.setData(mvt);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            data.setError(e);
         }
+        return data;
     }
 
     // creating put mapping that updates the marque detail
     @PutMapping("/MouvementEntree")
-    private int updateMouvementEntree(@RequestParam int idMouvementEntree,@RequestParam float valeur,@RequestParam String date,@RequestParam int idClient) {
-
+    private Data updateMouvementEntree(@RequestParam int idMouvementEntree,@RequestParam float valeur,@RequestParam int idClient) {
+        Data data=new Data();
         try {
             MouvementEntree mvt=new MouvementEntree();
             mvt.setIdMouvementEntree(idMouvementEntree);
             mvt.setValeur(valeur);
-            mvt.setDate(Date.valueOf(date));
             mvt.setIdClient(idClient);
             mvt.updateBase();
-            return 1;
+            data.setData(mvt);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            data.setError(e);
         }
+        return  data;
     }
 
 }

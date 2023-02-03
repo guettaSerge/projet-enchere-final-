@@ -7,6 +7,7 @@ package com.example.enchere.controller;
 import com.example.enchere.dao.Useful;
 import com.example.enchere.model.*;
 import com.example.enchere.modelAff.Encheres;
+import com.example.enchere.traitement.RechercheMultiParametre;
 import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 
@@ -23,7 +24,7 @@ public class EnchereController {
 
     // creating a get mapping that retrieves all the Marques detail from the
     // database
-    @GetMapping("/enchere")
+    @GetMapping("/encheres")
     private Data getAllEnchere() {
             Data data = new Data();
             try {
@@ -56,8 +57,9 @@ public class EnchereController {
         try {
 
             Encheres ad =new Encheres();
-            ad.setStatut(statut);
-            data.setData(ad.find());
+            RechercheMultiParametre parametre=new RechercheMultiParametre();
+            parametre.setStatut(statut);
+            data.setData(ad.multiCritere(parametre));
         } catch (Exception e) {
             data.setError(e);
         }
@@ -80,41 +82,68 @@ public class EnchereController {
 
     // creating post mapping that post the marque detail in the database
     @PostMapping("/Enchere")
-    private int saveEnchere(@RequestParam int idEnchere,@RequestParam int idProduit,@RequestParam int idClient, @RequestParam String debut, @RequestParam String duree,@RequestParam float prixDepart) {
-
+    private Data saveEnchere(@RequestParam String nom,@RequestParam String description,@RequestParam int idClient,@RequestParam int idCategory, @RequestParam String debut, @RequestParam String duree,@RequestParam float prixDepart) {
+        Data data = new Data();
         try {
            Enchere e=new Enchere();
-           e.setIdEnchere(idEnchere);
+           e.setNom(nom);
            e.setIdClient(idClient);
            e.setDebut(Date.valueOf(debut));
-           e.setFin(Useful.setStringToTime(duree));
+           e.setDuree(duree);
            e.setPrixDepart(prixDepart);
-           e.setIdProduit(idProduit);
-            e.insertBase();
-            return 1;
+           e.setIdCategory(idCategory);
+           e.setDescriptions(description);
+            e.insertionBase();
+            data.setData(e);
         }
         catch (Exception e){
-            return 0;
+            data.setError(e);
         }
+        return data;
     }
 
     // creating put mapping that updates the marque detail
-    @PutMapping("/Enchere")
-    private int updateEnchere(@RequestParam int idProduit,@RequestParam int idClient, @RequestParam String debut, @RequestParam String duree,@RequestParam float prixDepart) {
-
+    @PutMapping("")
+    private Data updateEnchere(@RequestParam int idEnchere,@RequestParam String description,@RequestParam int idClient,@RequestParam int idCategory, @RequestParam String debut, @RequestParam String duree,@RequestParam float prixDepart) {
+        Data data = new Data();
         try {
             Enchere e=new Enchere();
+            e.setIdEnchere(idEnchere);
             e.setIdClient(idClient);
             e.setDebut(Date.valueOf(debut));
-            e.setFin(Useful.setStringToTime(duree));
+            e.setDuree(duree);
             e.setPrixDepart(prixDepart);
-            e.setIdProduit(idProduit);
-            e.updateBase();
-            return 1;
+            e.setIdCategory(idCategory);
+            e.setDescriptions(description);
+            e.insertBase();
+           data.setData(e);
         }
         catch (Exception e){
-            return 0;
+            data.setError(e);
         }
+        finally {
+
+        }
+        return  data;
+    }
+    @GetMapping("/enchere/recherche")
+    private Data rechercheMulticritere(@RequestParam String motclef,@RequestParam Date debut ,@RequestParam Date fin,@RequestParam double min, @RequestParam double max, @RequestParam int statut) {
+        Data data = new Data();
+        try {
+            Date[] date={debut,fin};
+            Double[] prix={min,max};
+            RechercheMultiParametre parametre=new RechercheMultiParametre();
+            parametre.setMotClef(motclef);
+            parametre.setPrixObjet(prix);
+            parametre.setIntervalle(date);
+            parametre.setStatut(statut);
+           data.setData(new Encheres().multiCritere(parametre));
+
+        }
+        catch (Exception e){
+            data.setError(e);
+        }
+        return data;
     }
 
 }

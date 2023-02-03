@@ -3,23 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.example.enchere.model;
-
-
 import com.example.enchere.dao.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
 
-@TableName(table = "TokenAdmin",view="9")   
-public class Token extends AccessBase{
-    @Attribute(attrName = "idTokenAdmin", attrType = "", idPrimaryKey = "")
+@TableName(table = "TokenClient",view="9")
+public class TokenClient extends AccessBase{
+    @Attribute(attrName = "idTokenClient", attrType = "", idPrimaryKey = "")
     private Integer idToken;
-    @Attribute(attrName = "ValeurToken", attrType = "", idPrimaryKey = "")
+    @Attribute(attrName = "valeurToken", attrType = "", idPrimaryKey = "")
     private String valeurToken;
-    @Attribute(attrName = "DateExpiration", attrType = "", idPrimaryKey = "")
+    @Attribute(attrName = "dateExpiration", attrType = "dateExpiration", idPrimaryKey = "")
     private Date dateExpiration;
-    @Attribute(attrName = "adminidadmin", attrType = "", idPrimaryKey = "")
-    private Integer idAdmin;
+    @Attribute(attrName = "idClient", attrType = "", idPrimaryKey = "")
+    private Integer idClient;
 
     public Integer getIdToken() {
         return idToken;
@@ -45,25 +43,25 @@ public class Token extends AccessBase{
         this.dateExpiration = dateExpiration;
     }
 
-    public Integer getIdAdmin() {
-        return idAdmin;
+    public Integer getIdClient() {
+        return idClient;
     }
 
-    public void setIdAdmin(Integer idAdmin) {
-        this.idAdmin = idAdmin;
+    public void setIdClient(Integer idClient) {
+        this.idClient = idClient;
     }
 
     public Integer setClientByToken() throws Exception {
         this.setValeurToken(valeurToken);
-        ArrayList<Token> alltoken=this.find();
+        ArrayList<TokenClient> alltoken=this.find();
         if(alltoken.size()<=0)throw new Exception("token invalide");
-        Token client=alltoken.get(0);
+        TokenClient client=alltoken.get(0);
         if(client.getDateExpiration().before(new java.util.Date())){
             throw new Exception("token expiré");
         }
-        return client.getIdAdmin();
+        return client.getIdClient();
     }
-	public Iterable<Token> findAll() {
+	public Iterable<TokenClient> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -72,11 +70,16 @@ public class Token extends AccessBase{
 		// TODO Auto-generated method stub
 		return null;
 	}
-    public static void main(String[] args) throws Exception {
-        Token token =new Token();
-        token.setIdAdmin(1);
-        token.setValeurToken("dfsffdsf");
-        token.setDateExpiration(Date.valueOf("2022-01-11"));
-        token.insertBase();
+    public static void main(String [] args) throws Exception {
+        int idclient=1;
+        String token="rand"+(Math.random()+idclient)+"num";
+        Data data=new Data();
+        TokenClient tkn=new TokenClient();
+        tkn.setValeurToken(token);
+        tkn.setIdClient(1);
+        java.util.Date now=new java.util.Date();
+        now.setDate(now.getDate()+1);
+        tkn.setDateExpiration(new Date(now.getTime()));
+            tkn.insertBase();
     }
 }

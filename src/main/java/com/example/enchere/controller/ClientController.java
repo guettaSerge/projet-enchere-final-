@@ -18,7 +18,7 @@ import com.example.enchere.model.Data;
  */
 @CrossOrigin(origins="*",allowedHeaders="*")
 @RestController
-@RequestMapping("/Client")
+@RequestMapping("/venteenchere")
 public class ClientController {
 
     // creating a get mapping that retrieves all the Marques detail from the

@@ -27,10 +27,22 @@ public class Statistiques {
     }
     ArrayList<Benefice> benefice;
     ArrayList<ChiffreAffaire> chiffreAffaire;
-    ArrayList<ProduitTopBenefice> topProdBenef;
-    ArrayList<ProduitTopChiffreAffaire> topProdChiffAff;
-    ArrayList<ProduitVendu> topProduitVendu;
+    ArrayList<CategoryTopBenefice> topProdBenef;
+    ArrayList<CategoryTopChiffreAffaire> topProdChiffAff;
+    ArrayList<CategoryVendu> topCategoryVendu;
+    ArrayList<ProduitVendu>  produitVendu;
 
+    
+
+    public ArrayList<ProduitVendu> getProduitVendu() {
+        return produitVendu;
+    }
+
+    public void setProduitVendu(ArrayList<ProduitVendu> produitVendu) {
+        this.produitVendu = produitVendu;
+    }
+    
+    
     public ArrayList<Benefice> getBenefice() {
         return benefice;
     }
@@ -39,16 +51,16 @@ public class Statistiques {
         return chiffreAffaire;
     }
 
-    public ArrayList<ProduitTopBenefice> getTopProdBenef() {
+    public ArrayList<CategoryTopBenefice> getTopProdBenef() {
         return topProdBenef;
     }
 
-    public ArrayList<ProduitTopChiffreAffaire> getTopProdChiffAff() {
+    public ArrayList<CategoryTopChiffreAffaire> getTopProdChiffAff() {
         return topProdChiffAff;
     }
 
-    public ArrayList<ProduitVendu> getTopProduitVendu() {
-        return topProduitVendu;
+    public ArrayList<CategoryVendu> getTopCategoryVendu() {
+        return topCategoryVendu;
     }
 
     public void setBenefice(ArrayList<Benefice> benefice) {
@@ -59,16 +71,16 @@ public class Statistiques {
         this.chiffreAffaire = chiffreAffaire;
     }
 
-    public void setTopProdBenef(ArrayList<ProduitTopBenefice> topProdBenef) {
+    public void setTopProdBenef(ArrayList<CategoryTopBenefice> topProdBenef) {
         this.topProdBenef = topProdBenef;
     }
 
-    public void setTopProdChiffAff(ArrayList<ProduitTopChiffreAffaire> topProdChiffAff) {
+    public void setTopProdChiffAff(ArrayList<CategoryTopChiffreAffaire> topProdChiffAff) {
         this.topProdChiffAff = topProdChiffAff;
     }
 
-    public void setTopProduitVendu(ArrayList<ProduitVendu> topProduitVendu) {
-        this.topProduitVendu = topProduitVendu;
+    public void setTopCategoryVendu(ArrayList<CategoryVendu> topCategoryVendu) {
+        this.topCategoryVendu = topCategoryVendu;
     }
     
    public void find() throws Exception{
@@ -84,20 +96,25 @@ public class Statistiques {
         variable.setYears(years);
         this.setChiffreAffaire(variable.find(con));
         
-        ProduitTopBenefice variable1=new ProduitTopBenefice();
+        CategoryTopBenefice variable1=new CategoryTopBenefice();
         variable1.setMonth(month);
         variable1.setYears(years);
         this.setTopProdBenef(variable1.find(con));
         
-        ProduitTopChiffreAffaire variable2=new ProduitTopChiffreAffaire();
+        CategoryTopChiffreAffaire variable2=new CategoryTopChiffreAffaire();
         variable2.setMonth(month);
         variable2.setYears(years);
         this.setTopProdChiffAff(variable2.find(con));
         
-        ProduitVendu variable3=new ProduitVendu();
+        CategoryVendu variable3=new CategoryVendu();
         variable3.setMonth(month);
         variable3.setYears(years);
-        this.setTopProduitVendu(variable3.find(con));
+        this.setTopCategoryVendu(variable3.find(con));
+        
+        ProduitVendu variable4=new ProduitVendu();
+        variable4.setMonth(month);
+        variable4.setYears(years);
+        this.setProduitVendu(variable4.find(con));
         }
         catch(Exception e){
             throw e;
@@ -106,12 +123,52 @@ public class Statistiques {
         if(con!=null)con.close();
         }
     }
+   
+   public String[] getMontYear(){
+       int taille=this.benefice.size();
+       String[] str=new String[taille];
+      for(int i=0;i<taille;i++){
+          Benefice b=benefice.get(i);
+          str[i]="'"+b.getMonth()+"-"+b.getYears()+"'";
+      }
+      return str;
+   }
+   public String[] getBenefices(){
+        int taille=this.benefice.size();
+       String[] str=new String[taille];
+      for(int i=0;i<taille;i++){
+          Benefice b=benefice.get(i);
+          str[i]="'"+b.getBenefice()+"'";
+      }
+      return str;
+   }
+   public String[] getChiffreAffaires(){
+        int taille=this.chiffreAffaire.size();
+       String[] str=new String[taille];
+      for(int i=0;i<taille;i++){
+          ChiffreAffaire b=chiffreAffaire.get(i);
+          str[i]="'"+b.getChiffreAffaire()+"'";
+      }
+      return str;
+   }
+   
+   public String[] getProduitVendus(){
+        int taille=this.produitVendu.size();
+       String[] str=new String[taille];
+      for(int i=0;i<taille;i++){
+          ProduitVendu b=this.produitVendu.get(i);
+          str[i]="'"+b.getNombreProduit()+"'";
+      }
+      return str;
+   }
+  
+
     public static void main(String[]dfgrtg) throws Exception{
     Statistiques stat=new Statistiques();
-    stat.setMonth(1);
-    stat.setYears(1);
     stat.find();
-    System.out.println("hahaha");
+    stat.setYears(2023);
+    String[] my=stat.getMontYear();
+    System.out.println(my[0]);
     }
         
     
