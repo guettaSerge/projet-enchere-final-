@@ -52,6 +52,18 @@ public class ClientController {
         }
         return data;
     }
+    @PostMapping("/client/connection")
+    public Data getConnection (@RequestParam String email,@RequestParam String passe) throws Exception{
+        Data data = new Data();
+        try {
+            Client ad;
+            ad = new Client();
+            data.setData(ad.getClientConnected(email,passe));
+        } catch (Exception e) {
+            data.setError(e);
+        }
+        return data;
+    }
     @GetMapping("/client/solde/{client_id}")
     public Data getClientSolde (@PathVariable("client_id")int client_id) throws Exception{
         Data data = new Data();

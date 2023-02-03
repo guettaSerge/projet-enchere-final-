@@ -27,6 +27,15 @@ public class Client extends AccessBase{
     @Attribute(attrName = "passe", attrType = "", idPrimaryKey = "")
     private String passe;
 
+    public Client getClientConnected(String email,String passe) throws Exception {
+        if(email==null) throw new Exception("email vide");
+        if(passe==null) throw new Exception("passe vide");
+        this.setEmail(email);
+        this.setPasse(passe);
+        ArrayList<Client> client=this.find();
+        if(client.size()<=0) throw new Exception("votre email ou passe est vide");
+        return client.get(0);
+    }
     public Integer getIdClient() {
         return idClient;
     }
