@@ -34,7 +34,7 @@ public class AdminController {
         }
         return data;
     }
-    @GetMapping("/test")
+    @GetMapping("/admin/test")
     private Data Atestw() {
         Data data = new Data();
         try {
