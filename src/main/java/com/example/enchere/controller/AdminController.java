@@ -29,7 +29,7 @@ public class AdminController {
 
             Admin ad =new Admin();
             ad.find();
-            return "je teste juste";
+            return "je teste juste 1";
         } catch (Exception e) {
             data.setError(e);
             return e.getMessage();
