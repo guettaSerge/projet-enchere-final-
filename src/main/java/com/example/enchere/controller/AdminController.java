@@ -23,12 +23,12 @@ public class AdminController {
     // creating a get mapping that retrieves all the Marques detail from the
     // database
     @GetMapping("/admin")
-    private String getAllAdmin() {
+    private Object getAllAdmin() {
         Data data = new Data();
         try {
 
             Admin ad =new Admin();
-            data.setData(ad.find());
+            return ad.find();
         } catch (Exception e) {
             data.setError(e);
         }
