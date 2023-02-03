@@ -38,8 +38,6 @@ public class AdminController {
     private Data Atestw() {
         Data data = new Data();
         try {
-
-            Admin ad =new Admin();
             data.setData("je suis serge et j'aime la glace");
         } catch (Exception e) {
             data.setError(e);
